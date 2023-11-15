@@ -25,7 +25,7 @@ namespace Library.DataAccess
             PersonModels person = new() { FirstName = firstName, LastName = lastName };
             person.Id = people.Max(x => x.Id) + 1;
             people.Add(person);
-            return person.;
+            return person;
         }
     }
 }
