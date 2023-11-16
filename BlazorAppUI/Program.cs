@@ -1,10 +1,18 @@
 using BlazorAppUI.Components;
+using Library;
+using Library.DataAccess;
+using Microsoft.Extensions.DependencyInjection;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddSingleton<IDataAccess,DataAccess>();
+builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<LibararyMediatREntryPoint>());
 
 var app = builder.Build();
 
