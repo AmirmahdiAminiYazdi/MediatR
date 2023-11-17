@@ -1,4 +1,5 @@
-﻿using Library.Models;
+﻿using Library.Commands;
+using Library.Models;
 using Library.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -33,8 +34,10 @@ namespace WebApi.Controllers
 
         // POST api/<PersonController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<PersonModels> Post([FromBody] PersonModels value)
         {
+            var model = new InsertPersonCommand(value.FirstName, value.LastName);
+            return await _mediator.Send(model);
         }
 
         // PUT api/<PersonController>/5
